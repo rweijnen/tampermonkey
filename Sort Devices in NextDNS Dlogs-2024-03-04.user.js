@@ -51,7 +51,7 @@
                 if (dropdown && !dropdown.querySelector('input[type="text"]')) {
                     sortDropdownItems(dropdown);
                     addSearchBox(dropdown);
-                    observer.disconnect(); // Disconnect to prevent looping, uncomment if necessary
+                    observer.disconnect(); // Disconnect to prevent looping
                 }
             }
         }
