@@ -7,6 +7,8 @@
 // @match        https://my.nextdns.io/*/logs
 // @icon         https://www.google.com/s2/favicons?sz=64&domain=nextdns.io
 // @grant        none
+// @updateURL    https://github.com/rweijnen/tampermonkey/raw/main/Sort%20Devices%20in%20NextDNS%20Dlogs-2024-03-04.user.js
+// @downloadURL  https://github.com/rweijnen/tampermonkey/raw/main/Sort%20Devices%20in%20NextDNS%20Dlogs-2024-03-04.user.js
 // ==/UserScript==
 
 (function() {
