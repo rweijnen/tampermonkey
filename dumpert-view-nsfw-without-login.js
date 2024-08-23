@@ -20,7 +20,7 @@
 
         // Add event listener to process the response when it's ready
         this.addEventListener('readystatechange', function() {
-            if (this.readyState === 4 && this.status === 200 && url.includes('/mobile_api/json/info/')) {
+            if (this.readyState === 4 && this.status === 200 && url.includes('api/')) {
 
                 let jsonResponse;
                 try {
