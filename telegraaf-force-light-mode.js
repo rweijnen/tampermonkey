@@ -8,8 +8,8 @@
 // @match        https://telegraaf.nl/*
 // @grant        none
 // @run-at       document-start
-// @updateURL    https://github.com/rweijnen/tampermonkey/
-// @downloadURL  https://github.com/rweijnen/tampermonkey/
+// @updateURL    https://github.com/rweijnen/tampermonkey/blob/main/telegraaf-force-light-mode.js
+// @downloadURL  https://github.com/rweijnen/tampermonkey/blob/main/telegraaf-force-light-mode.js
 // ==/UserScript==
 
 (function() {
