@@ -1,11 +1,11 @@
 // ==UserScript==
 // @name         DigiD app login - Samsung hint
 // @namespace    https://github.com/rweijnen/tampermonkey
-// @version      1.1
-// @description  Verduidelijkt de DigiD app inlogpagina: voegt "op de Samsung Smartphone!" toe en vervangt de koppelcode-uitleg met een duidelijkere instructie.
+// @version      1.2
+// @description  Verduidelijkt de DigiD inlogpagina's: markeert de "Met de DigiD app" keuzeknop, voegt "op de Samsung Smartphone!" toe en vervangt de koppelcode-uitleg.
 // @author       Remko Weijnen
-// @match        https://digid.nl/inloggen_app*
-// @match        https://www.digid.nl/inloggen_app*
+// @match        https://digid.nl/inloggen*
+// @match        https://www.digid.nl/inloggen*
 // @run-at       document-end
 // @grant        none
 // ==/UserScript==
@@ -19,6 +19,38 @@
     const NEW_LABEL_TEXT = 'VUL EERST DE PINCODE IN OP DE SMARTPHONE, EN DAARNA PAS DE KOPPELCODE DIE DE SMARTPHONE GEEFT IN HET VELD HIERONDER';
     const MARKER = 'samsungHintAdded';
     const LABEL_MARKER = 'samsungLabelUpdated';
+    const BUTTON_MARKER = 'samsungButtonHighlighted';
+
+    function makeArrow(text) {
+        const span = document.createElement('span');
+        span.textContent = text;
+        span.style.color = 'red';
+        span.style.fontWeight = 'bold';
+        span.style.fontSize = '1.4em';
+        span.style.whiteSpace = 'nowrap';
+        return span;
+    }
+
+    function highlightAppButton() {
+        const btn = document.querySelector('a#authentication_type_account_app');
+        if (!btn || btn.dataset[BUTTON_MARKER]) return;
+
+        btn.style.boxShadow = '0 0 0 4px red';
+        btn.style.fontWeight = 'bold';
+
+        const wrapper = document.createElement('div');
+        wrapper.style.display = 'flex';
+        wrapper.style.alignItems = 'center';
+        wrapper.style.gap = '15px';
+        wrapper.style.margin = '20px 0';
+        wrapper.style.flexWrap = 'wrap';
+
+        btn.parentNode.insertBefore(wrapper, btn);
+        wrapper.appendChild(makeArrow('----> DRUK OP DEZE KNOP >>>'));
+        wrapper.appendChild(btn);
+
+        btn.dataset[BUTTON_MARKER] = '1';
+    }
 
     function addHint() {
         const headings = document.querySelectorAll('h2.orange_heading');
@@ -46,9 +78,14 @@
         }
     }
 
-    addHint();
+    function run() {
+        addHint();
+        highlightAppButton();
+    }
+
+    run();
 
     // Voor het geval de pagina dynamisch (her)laadt
-    const observer = new MutationObserver(addHint);
+    const observer = new MutationObserver(run);
     observer.observe(document.body, { childList: true, subtree: true });
 })();
