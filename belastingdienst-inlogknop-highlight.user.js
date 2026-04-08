@@ -1,8 +1,8 @@
 // ==UserScript==
 // @name         Belastingdienst - Inlogknop benadrukken
 // @namespace    https://github.com/rweijnen/tampermonkey
-// @version      1.1
-// @description  Markeert de inlogknoppen op belastingdienst.nl en mijn.belastingdienst.nl met grote rode pijlen ter verduidelijking.
+// @version      1.2
+// @description  Markeert de inlogknoppen op belastingdienst.nl en mijn.belastingdienst.nl met een grote rode pijl ter verduidelijking.
 // @author       Remko Weijnen
 // @match        https://www.belastingdienst.nl/wps/wcm/connect/nl/home/content/inloggen-mijn-belastingdienst*
 // @match        https://mijn.belastingdienst.nl/*
@@ -47,7 +47,6 @@
         btn.parentNode.insertBefore(wrapper, btn);
         wrapper.appendChild(makeArrow('----> DRUK OP DEZE KNOP >>>'));
         wrapper.appendChild(btn);
-        wrapper.appendChild(makeArrow('<<< DRUK OP DEZE KNOP <----'));
 
         btn.dataset[MARKER] = '1';
     }
